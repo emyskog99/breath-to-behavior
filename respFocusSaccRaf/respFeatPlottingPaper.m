@@ -9,13 +9,14 @@ scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
 outDir = paperFigureDir(3);
 
-rafFile  = fullfile(scriptDir, 'respFeatRafV1V4Array.mat');
-abooFile = fullfile(scriptDir, 'respFeatAbooV1V4Array.mat');
+rafFile  = fullfile(scriptDir, 'respFeaturesRaf.mat');
+abooFile = fullfile(fileparts(scriptDir), 'respFocusSaccAboo', ...
+    'respFeaturesAboo.mat');
 assert(isfile(rafFile),  'Missing input file: %s', rafFile);
 assert(isfile(abooFile), 'Missing input file: %s', abooFile);
 
-rafData = load(rafFile, 'respFeatRafV1V4Array');
-respFeatRafArray = rafData.respFeatRafV1V4Array;
+rafData = load(rafFile, 'respFeaturesRaf');
+respFeatRafArray = rafData.respFeaturesRaf;
 respFeatAbooArray = loadRespFeatureArray(abooFile);
 
 % Trial-result values from exGlobals.m. Keeping the four values used here
@@ -128,14 +129,11 @@ fprintf('Figure 3 outputs saved to:\n%s\n', outDir);
 
 %% Local functions
 function respFeatArray = loadRespFeatureArray(matFile)
-loaded = load(matFile);
-names = fieldnames(loaded);
-nameStrings = lower(string(names));
-pick = find(contains(nameStrings, 'respfeat') & contains(nameStrings, 'array'), 1);
-if isempty(pick)
-    error('No respiration feature array was found in %s.', matFile);
+loaded = load(matFile, 'respFeaturesAboo');
+if ~isfield(loaded, 'respFeaturesAboo')
+    error('Variable respFeaturesAboo was not found in %s.', matFile);
 end
-respFeatArray = loaded.(names{pick});
+respFeatArray = loaded.respFeaturesAboo;
 end
 
 function [meanCorrect, meanIncorrect, sessionIndices] = computeSessionMeans(respFeatArray, metricNames, codes)

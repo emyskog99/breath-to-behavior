@@ -8,10 +8,10 @@ scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
 outDir = paperFigureDir(1);
 
-srcMat = fullfile(scriptDir, 'respFeatAbooV1V4Array.mat');
+srcMat = fullfile(scriptDir, 'respFeaturesAboo.mat');
 assert(isfile(srcMat), 'Missing input file: %s', srcMat);
-loaded = load(srcMat, 'respFeatAbooV1V4Array');
-respFeatArray = loaded.respFeatAbooV1V4Array;
+loaded = load(srcMat, 'respFeaturesAboo');
+respFeatArray = loaded.respFeaturesAboo;
 
 % Trial-result values used by exGlobals.m. Keeping them local avoids loading
 % lab acquisition configuration merely to recreate a behavior panel.

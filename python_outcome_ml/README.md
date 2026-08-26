@@ -103,8 +103,8 @@ To test the pipeline quickly before the complete nested analysis:
 
 ```powershell
 .\python_outcome_ml\.venv\Scripts\python.exe python_outcome_ml\run_outcome_ml.py `
-  respFocusSaccRaf\respFeatRafV1V4Array.mat `
-  --variable respFeatRafV1V4Array --monkey RA --quick
+  respFocusSaccRaf\respFeaturesRaf.mat `
+  --variable respFeaturesRaf --monkey RA --quick
 ```
 
 Remove `--quick` for complete results. Full nested LOSO can take several

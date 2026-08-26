@@ -11,8 +11,8 @@ projectDir = fileparts(scriptDir);
 outDir = fullfile(scriptDir, 'outputs', 'loso_regression');
 if ~isfolder(outDir), mkdir(outDir); end
 
-rafFile = fullfile(projectDir, 'respFocusSaccRaf', 'respFeatRafV1V4Array.mat');
-abFile = fullfile(projectDir, 'respFocusSaccAboo', 'respFeatAbooV1V4Array.mat');
+rafFile = fullfile(projectDir, 'respFocusSaccRaf', 'respFeaturesRaf.mat');
+abFile = fullfile(projectDir, 'respFocusSaccAboo', 'respFeaturesAboo.mat');
 assert(isfile(rafFile), 'Missing input file: %s', rafFile);
 assert(isfile(abFile), 'Missing input file: %s', abFile);
 
@@ -21,11 +21,11 @@ featureNames = { ...
     'exhStartTimesRel', 'respVolume', 'inhVolume', 'exhVolume', ...
     'inhDepth', 'exhDepth'};
 
-rafLoaded = load(rafFile, 'respFeatRafV1V4Array');
-abLoaded = load(abFile, 'respFeatAbooV1V4Array');
+rafLoaded = load(rafFile, 'respFeaturesRaf');
+abLoaded = load(abFile, 'respFeaturesAboo');
 
-dataR = buildTrialDataset(rafLoaded.respFeatRafV1V4Array, "RA", featureNames);
-dataA = buildTrialDataset(abLoaded.respFeatAbooV1V4Array, "AB", featureNames);
+dataR = buildTrialDataset(rafLoaded.respFeaturesRaf, "RA", featureNames);
+dataA = buildTrialDataset(abLoaded.respFeaturesAboo, "AB", featureNames);
 
 fprintf('Running Monkey RA LOSO (%d trials, %d sessions)...\n', ...
     height(dataR), numel(unique(dataR.Session)));

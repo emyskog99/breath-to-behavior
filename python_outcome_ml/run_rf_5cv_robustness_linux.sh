@@ -8,8 +8,8 @@ VISIBLE_CPUS="$(nproc)"
 DEFAULT_JOBS=$(( VISIBLE_CPUS > 12 ? 12 : VISIBLE_CPUS ))
 N_JOBS="${N_JOBS:-$DEFAULT_JOBS}"
 LOG_DIR="${LOG_DIR:-$SCRIPT_DIR/logs}"
-RA_CACHE="$SCRIPT_DIR/cache/respFeatRafV1V4Array_respFeatRafV1V4Array_numeric.mat"
-AB_CACHE="$SCRIPT_DIR/cache/respFeatAbooV1V4Array_respFeatAbooV1V4Array_numeric.mat"
+RA_CACHE="$SCRIPT_DIR/cache/respFeaturesRaf_respFeaturesRaf_numeric.mat"
+AB_CACHE="$SCRIPT_DIR/cache/respFeaturesAboo_respFeaturesAboo_numeric.mat"
 
 if [[ ! -x "$VENV_DIR/bin/python" ]]; then
     echo "Missing $VENV_DIR/bin/python; run: bash $SCRIPT_DIR/setup_linux.sh" >&2

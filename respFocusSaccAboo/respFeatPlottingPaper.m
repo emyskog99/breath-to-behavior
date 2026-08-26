@@ -8,16 +8,16 @@ scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
 outDir = paperFigureDir(3);
 
-abooFile = fullfile(scriptDir, 'respFeatAbooV1V4Array.mat');
+abooFile = fullfile(scriptDir, 'respFeaturesAboo.mat');
 rafFile = fullfile(fileparts(scriptDir), 'respFocusSaccRaf', ...
-    'respFeatRafV1V4Array.mat');
+    'respFeaturesRaf.mat');
 assert(isfile(abooFile), 'Missing input file: %s', abooFile);
 assert(isfile(rafFile), 'Missing input file: %s', rafFile);
 
-abooData = load(abooFile, 'respFeatAbooV1V4Array');
-rafData = load(rafFile, 'respFeatRafV1V4Array');
-respFeatAbooArray = abooData.respFeatAbooV1V4Array;
-respFeatRafArray = rafData.respFeatRafV1V4Array;
+abooData = load(abooFile, 'respFeaturesAboo');
+rafData = load(rafFile, 'respFeaturesRaf');
+respFeatAbooArray = abooData.respFeaturesAboo;
+respFeatRafArray = rafData.respFeaturesRaf;
 
 codes.CORRECT     = 150;
 codes.FALSEALARM  = 156;

@@ -8,11 +8,11 @@ addpath(scriptDir);
 outDir = paperFigureDir(2);
 files = dir(fullfile(scriptDir, 'publication_data', 'Raf_s*.mat'));
 assert(~isempty(files), 'No Raf session MAT files were found.');
-featureFile = fullfile(scriptDir, 'respFeatRafV1V4Array.mat');
+featureFile = fullfile(scriptDir, 'respFeaturesRaf.mat');
 assert(isfile(featureFile), ...
     'Missing %s. Run rebuild_all_features before Figure 2.', featureFile);
-featuresLoaded = load(featureFile, 'respFeatRafV1V4Array');
-featureArray = featuresLoaded.respFeatRafV1V4Array;
+featuresLoaded = load(featureFile, 'respFeaturesRaf');
+featureArray = featuresLoaded.respFeaturesRaf;
 
 allTables = cell(numel(files), 1);
 allTraces = cell(numel(files), 1);

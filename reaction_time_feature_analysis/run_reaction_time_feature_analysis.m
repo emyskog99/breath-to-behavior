@@ -9,13 +9,13 @@ projectDir = fileparts(scriptDir);
 outDir = fullfile(scriptDir, 'outputs');
 if ~isfolder(outDir), mkdir(outDir); end
 
-rafFile = fullfile(projectDir, 'respFocusSaccRaf', 'respFeatRafV1V4Array.mat');
-abFile = fullfile(projectDir, 'respFocusSaccAboo', 'respFeatAbooV1V4Array.mat');
+rafFile = fullfile(projectDir, 'respFocusSaccRaf', 'respFeaturesRaf.mat');
+abFile = fullfile(projectDir, 'respFocusSaccAboo', 'respFeaturesAboo.mat');
 assert(isfile(rafFile), 'Missing input file: %s', rafFile);
 assert(isfile(abFile), 'Missing input file: %s', abFile);
 
-rafLoaded = load(rafFile, 'respFeatRafV1V4Array');
-abLoaded = load(abFile, 'respFeatAbooV1V4Array');
+rafLoaded = load(rafFile, 'respFeaturesRaf');
+abLoaded = load(abFile, 'respFeaturesAboo');
 
 metricNames = { ...
     'inhStartTimesRel', 'respLengths', 'exhLengths', 'inhLengths', ...
@@ -30,9 +30,9 @@ metricTitles = { ...
 isTiming = [true(1,5), false(1,5)];
 
 [sessionR, fastR, slowR, allRTR] = analyzeAnimal( ...
-    rafLoaded.respFeatRafV1V4Array, "RA", metricNames);
+    rafLoaded.respFeaturesRaf, "RA", metricNames);
 [sessionA, fastA, slowA, allRTA] = analyzeAnimal( ...
-    abLoaded.respFeatAbooV1V4Array, "AB", metricNames);
+    abLoaded.respFeaturesAboo, "AB", metricNames);
 
 sessionSummary = [sessionR; sessionA];
 writetable(sessionSummary, fullfile(outDir, 'reaction_time_session_summary.csv'));
