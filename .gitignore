@@ -1,0 +1,29 @@
+# MATLAB temporary and generated files
+*.asv
+*.m~
+*.autosave
+slprj/
+codegen/
+
+# Runtime logs and temporary exports
+*.log
+*.tmp
+*.bak
+*.mat
+*.fig
+*.joblib
+figures/
+outputs/
+python_ml_results/
+**/publication_data/*.csv
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
