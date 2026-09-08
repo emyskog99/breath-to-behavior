@@ -13,8 +13,8 @@ spike waveforms, and the original NS2/NEV structures are excluded.
 ## Repository layout
 
 ```text
-respFocusSaccAboo/                 Monkey AB feature and figure code
-respFocusSaccRaf/                  Monkey RA feature and figure code
+respFocusSaccAb/                   Monkey Ab feature and figure code
+respFocusSaccRa/                   Monkey Ra feature and figure code
 python_outcome_ml/                 Python grouped-CV/LOSO outcome models
 reaction_time_feature_analysis/    MATLAB reaction-time analyses
 raw_respiration_frequency_analysis/ filtered-signal peak-frequency analysis
@@ -29,14 +29,14 @@ Clone the code, then download the compact MAT files from KiltHub:
 
 ```bash
 git clone <REPOSITORY_URL>
-cd Resp_NHP_Paper_GitHub
+cd breath-to-behavior
 ```
 
 Place the files as follows:
 
 ```text
-respFocusSaccAboo/publication_data/Aboo_s*.mat   # 47 files
-respFocusSaccRaf/publication_data/Raf_s*.mat     # 41 files
+respFocusSaccAb/publication_data/Ab_s*.mat   # 47 files
+respFocusSaccRa/publication_data/Ra_s*.mat   # 41 files
 ```
 
 The repository ignores MAT files so downloaded data and generated results
@@ -65,7 +65,7 @@ analysis scripts require derived trial-level feature arrays. The important
 reader is:
 
 ```text
-respFocusSaccAboo/extractRespFeaturesFromPublicationData.m
+respFocusSaccAb/extractRespFeaturesFromPublicationData.m
 ```
 
 It loads each `publicationData` session file, calculates the respiration timing,
@@ -82,13 +82,13 @@ matlab -batch "rebuild_all_features(8)"
 This creates:
 
 ```text
-respFocusSaccAboo/respFeaturesAboo.mat
-respFocusSaccRaf/respFeaturesRaf.mat
+respFocusSaccAb/respFeaturesAb.mat
+respFocusSaccRa/respFeaturesRa.mat
 ```
 
 Run feature extraction before generating Figures 1, 3, 4, or 5, running the
 reaction-time analyses, or exporting features for the Python outcome models.
-Figure 2 also uses the rebuilt Raf feature array for its outcome-specific
+Figure 2 also uses the rebuilt Ra feature array for its outcome-specific
 feature panels, while reading respiration waveforms directly from the compact
 session MAT files.
 
@@ -96,17 +96,17 @@ For one animal or a custom output location, call the reader directly. For
 example, from the repository root:
 
 ```matlab
-addpath('respFocusSaccAboo')
+addpath('respFocusSaccAb')
 extractRespFeaturesFromPublicationData( ...
-    'InputDir', fullfile('respFocusSaccRaf', 'publication_data'), ...
-    'OutputFile', fullfile('respFocusSaccRaf', ...
-        'respFeaturesRaf.mat'), ...
-    'Subject', 'Raf', ...
-    'OutputVariable', 'respFeaturesRaf', ...
+    'InputDir', fullfile('respFocusSaccRa', 'publication_data'), ...
+    'OutputFile', fullfile('respFocusSaccRa', ...
+        'respFeaturesRa.mat'), ...
+    'Subject', 'Ra', ...
+    'OutputVariable', 'respFeaturesRa', ...
     'NumWorkers', 8);
 ```
 
-After extraction, validate the 47 Monkey AB and 41 Monkey RA sessions and
+After extraction, validate the 47 Monkey Ab and 41 Monkey Ra sessions and
 cross-check their trial counts:
 
 ```bash
@@ -118,10 +118,10 @@ validation.`
 
 ## Compact session format
 
-Every `Aboo_s*.mat` or `Raf_s*.mat` file contains one `publicationData`
+Every `Ab_s*.mat` or `Ra_s*.mat` file contains one `publicationData`
 structure using `RespNHPPublicationSession` schema version 1:
 
-- `session`: subject, session number, dataset, and trial count
+- `session`: source metadata, session number, and trial count
 - `respiration.filteredSignal`: complete filtered 1 kHz respiration trace
 - `respiration`: sampling rate, channel label, units, and precision metadata
 - `behavior`: per-trial outcomes, difficulty, and event/duration vectors

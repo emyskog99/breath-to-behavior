@@ -10,9 +10,9 @@ clear; clc; rng(1);
 %% ---------------- Load ----------------
 scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
-srcMat = fullfile(scriptDir, 'respFeaturesRaf.mat');
+srcMat = fullfile(scriptDir, 'respFeaturesRa.mat');
 assert(isfile(srcMat), 'Could not find %s. Run rebuild_all_features first.', srcMat);
-load(srcMat,'respFeaturesRaf');
+load(srcMat,'respFeaturesRa');
 
 codes.CORRECT     = 150;
 codes.FALSEALARM  = 156;
@@ -37,11 +37,11 @@ statsRows = cell(numel(featList), 1);
 for f = 1:numel(featList)
     featName = featList{f};
 
-    best = findBestSessionByEffect_trialInfo(respFeaturesRaf, featName, codes);
+    best = findBestSessionByEffect_trialInfo(respFeaturesRa, featName, codes);
     fprintf('Best session for %s: sessIdx=%d (effect=%.3f)\n', featName, best.sessIdx, best.effect);
 
     statsRows{f} = plotAndSaveHist_trialInfo( ...
-        respFeaturesRaf, best.sessIdx, featName, codes, outDir, ...
+        respFeaturesRa, best.sessIdx, featName, codes, outDir, ...
         nBins, useCommonEdges, normalizeMode, colorC, colorI);
 end
 

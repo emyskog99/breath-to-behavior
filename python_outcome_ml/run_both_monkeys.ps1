@@ -24,15 +24,15 @@ $env:NUMEXPR_NUM_THREADS = '1'
 
 Write-Host "Progress log: $logFile"
 & $python -u (Join-Path $scriptDir 'run_outcome_ml.py') `
-    (Join-Path $projectDir 'respFocusSaccRaf\respFeaturesRaf.mat') `
-    --variable respFeaturesRaf --monkey RA `
+    (Join-Path $projectDir 'respFocusSaccRa\respFeaturesRa.mat') `
+    --variable respFeaturesRa --monkey Ra `
     --n-jobs $Jobs --search-verbose $SearchVerbose `
     --use-existing-cache 2>&1 | Tee-Object -FilePath $logFile -Append
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 & $python -u (Join-Path $scriptDir 'run_outcome_ml.py') `
-    (Join-Path $projectDir 'respFocusSaccAboo\respFeaturesAboo.mat') `
-    --variable respFeaturesAboo --monkey AB `
+    (Join-Path $projectDir 'respFocusSaccAb\respFeaturesAb.mat') `
+    --variable respFeaturesAb --monkey Ab `
     --n-jobs $Jobs --search-verbose $SearchVerbose `
     --use-existing-cache 2>&1 | Tee-Object -FilePath $logFile -Append
 exit $LASTEXITCODE

@@ -1,14 +1,14 @@
-# Monkey RA paper figure code
+# Monkey Ra paper figure code
 
 Run one section at a time in `run_paper_figures.m`. Outputs are written under
 `figures/Figure_N/` and are ignored by Git.
 
 | Figure | Content | Script(s) | Input |
 |---|---|---|---|
-| 1 | Behavioral performance | `behaviorPlotting.m` | compact Raf sessions |
-| 2 | Filtered signal, spectrum, spectrogram, trial waveforms | `respTraceCont_Paper.m`, `plotRespTrialByTrialPaper.m` | compact Raf sessions |
-| 3 | Session feature differences | `respFeatPlottingPaper.m` | rebuilt RA + AB features |
-| 4 | Example-session distributions | `plot_hist_bestSession_trialInfoFeatures.m` | rebuilt RA features |
+| 1 | Behavioral performance | `behaviorPlotting.m` | compact Ra sessions |
+| 2 | Filtered signal, spectrum, spectrogram, trial waveforms | `respTraceCont_Paper.m`, `plotRespTrialByTrialPaper.m` | compact Ra sessions |
+| 3 | Session feature differences | `respFeatPlottingPaper.m` | rebuilt Ra + Ab features |
+| 4 | Example-session distributions | `plot_hist_bestSession_trialInfoFeatures.m` | rebuilt Ra features |
 | 5 | RF importance and feature sweep | `plotFeatureImpRespML5CV.m`, `analyzeRespFeaturesIterationRFML_Paper.m` | Python ML outputs |
 
 First download the KiltHub files into `publication_data/`. Then run

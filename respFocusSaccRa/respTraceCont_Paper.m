@@ -5,8 +5,8 @@ clear; clc;
 scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
 outDir = paperFigureDir(2);
-files = dir(fullfile(scriptDir, 'publication_data', 'Raf_s*.mat'));
-assert(~isempty(files), 'No Raf session MAT files were found.');
+files = dir(fullfile(scriptDir, 'publication_data', 'Ra_s*.mat'));
+assert(~isempty(files), 'No Ra session MAT files were found.');
 [~, order] = sort({files.name});
 files = files(order);
 loaded = load(fullfile(files(1).folder, files(1).name), 'publicationData');
@@ -31,7 +31,7 @@ for i = 1:numel(relativeStarts)
     xline(relativeStarts(i), ':', 'Color',[0.4 0.4 0.4]);
 end
 xlabel('Time (s)'); ylabel('Amplitude (A.U.)');
-title(sprintf('Filtered respiration, Monkey RA session %d', ...
+title(sprintf('Filtered respiration, Monkey Ra session %d', ...
     data.session.number));
 set(gca, 'FontName','Arial', 'FontWeight','bold', 'Box','off', ...
     'TickDir','out', 'FontSize',16);

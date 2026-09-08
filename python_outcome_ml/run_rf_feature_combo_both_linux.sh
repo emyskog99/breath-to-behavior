@@ -48,9 +48,9 @@ echo "[$(date --iso-8601=seconds)] Visible CPUs: $VISIBLE_CPUS; workers: $N_JOBS
 echo "[$(date --iso-8601=seconds)] Progress log: $LOG_FILE"
 
 {
-    run_monkey RA respFocusSaccRaf respFeaturesRaf.mat \
-        respFeaturesRaf Monkey_RA
-    run_monkey AB respFocusSaccAboo respFeaturesAboo.mat \
-        respFeaturesAboo Monkey_AB
+    run_monkey Ra respFocusSaccRa respFeaturesRa.mat \
+        respFeaturesRa Monkey_Ra
+    run_monkey Ab respFocusSaccAb respFeaturesAb.mat \
+        respFeaturesAb Monkey_Ab
     echo "[$(date --iso-8601=seconds)] Both feature-combination sweeps complete"
 } 2>&1 | tee -a "$LOG_FILE"

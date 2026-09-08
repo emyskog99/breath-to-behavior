@@ -6,13 +6,13 @@ clear; clc; rng(1);
 scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
 outDir = paperFigureDir(2);
-files = dir(fullfile(scriptDir, 'publication_data', 'Raf_s*.mat'));
-assert(~isempty(files), 'No Raf session MAT files were found.');
-featureFile = fullfile(scriptDir, 'respFeaturesRaf.mat');
+files = dir(fullfile(scriptDir, 'publication_data', 'Ra_s*.mat'));
+assert(~isempty(files), 'No Ra session MAT files were found.');
+featureFile = fullfile(scriptDir, 'respFeaturesRa.mat');
 assert(isfile(featureFile), ...
     'Missing %s. Run rebuild_all_features before Figure 2.', featureFile);
-featuresLoaded = load(featureFile, 'respFeaturesRaf');
-featureArray = featuresLoaded.respFeaturesRaf;
+featuresLoaded = load(featureFile, 'respFeaturesRa');
+featureArray = featuresLoaded.respFeaturesRa;
 
 allTables = cell(numel(files), 1);
 allTraces = cell(numel(files), 1);
@@ -22,7 +22,7 @@ for s = 1:numel(files)
     sessionNumber = double(data.session.number);
     assert(sessionNumber <= numel(featureArray) && ...
         ~isempty(featureArray(sessionNumber).trialInfo), ...
-        'No rebuilt features found for Raf session %d.', sessionNumber);
+        'No rebuilt features found for Ra session %d.', sessionNumber);
     trialInfo = featureArray(sessionNumber).trialInfo;
     fs = double(data.respiration.sampleRateHz);
     resp = double(data.respiration.filteredSignal(:))';

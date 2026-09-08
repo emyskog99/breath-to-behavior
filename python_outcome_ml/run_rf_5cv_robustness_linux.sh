@@ -8,14 +8,14 @@ VISIBLE_CPUS="$(nproc)"
 DEFAULT_JOBS=$(( VISIBLE_CPUS > 12 ? 12 : VISIBLE_CPUS ))
 N_JOBS="${N_JOBS:-$DEFAULT_JOBS}"
 LOG_DIR="${LOG_DIR:-$SCRIPT_DIR/logs}"
-RA_CACHE="$SCRIPT_DIR/cache/respFeaturesRaf_respFeaturesRaf_numeric.mat"
-AB_CACHE="$SCRIPT_DIR/cache/respFeaturesAboo_respFeaturesAboo_numeric.mat"
+Ra_CACHE="$SCRIPT_DIR/cache/respFeaturesRa_respFeaturesRa_numeric.mat"
+Ab_CACHE="$SCRIPT_DIR/cache/respFeaturesAb_respFeaturesAb_numeric.mat"
 
 if [[ ! -x "$VENV_DIR/bin/python" ]]; then
     echo "Missing $VENV_DIR/bin/python; run: bash $SCRIPT_DIR/setup_linux.sh" >&2
     exit 1
 fi
-if [[ ! -f "$RA_CACHE" || ! -f "$AB_CACHE" ]]; then
+if [[ ! -f "$Ra_CACHE" || ! -f "$Ab_CACHE" ]]; then
     echo "Missing numeric cache(s) under $SCRIPT_DIR/cache" >&2
     exit 1
 fi
@@ -42,15 +42,15 @@ echo "[$(date --iso-8601=seconds)] Progress log: $LOG_FILE"
 
 {
     run_analysis previous-correct \
-        --cache-file "$RA_CACHE" --monkey RA \
-        --output-dir "$PROJECT_DIR/respFocusSaccRaf/python_ml_results/Monkey_RA/robustness_5cv_previous_correct"
+        --cache-file "$Ra_CACHE" --monkey Ra \
+        --output-dir "$PROJECT_DIR/respFocusSaccRa/python_ml_results/Monkey_Ra/robustness_5cv_previous_correct"
 
     run_analysis previous-correct \
-        --cache-file "$AB_CACHE" --monkey AB \
-        --output-dir "$PROJECT_DIR/respFocusSaccAboo/python_ml_results/Monkey_AB/robustness_5cv_previous_correct"
+        --cache-file "$Ab_CACHE" --monkey Ab \
+        --output-dir "$PROJECT_DIR/respFocusSaccAb/python_ml_results/Monkey_Ab/robustness_5cv_previous_correct"
 
     run_analysis combined \
-        --ra-cache "$RA_CACHE" --ab-cache "$AB_CACHE" \
+        --ra-cache "$Ra_CACHE" --ab-cache "$Ab_CACHE" \
         --output-dir "$PROJECT_DIR/combined_monkeys_python_ml_results/RandomForest_Grouped5CV"
 
     echo "[$(date --iso-8601=seconds)] All RF grouped-5CV robustness analyses complete"

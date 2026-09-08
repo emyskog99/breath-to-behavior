@@ -1,4 +1,4 @@
-%% Figure 1 - Behavioral performance (Monkey RA)
+%% Figure 1 - Behavioral performance (Monkey Ra)
 % Uses only the compact publication session MAT files.
 
 clear; clc;
@@ -6,8 +6,8 @@ scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
 dataDir = fullfile(scriptDir, 'publication_data');
 outDir = paperFigureDir(1);
-files = dir(fullfile(dataDir, 'Raf_s*.mat'));
-assert(~isempty(files), 'No Raf session MAT files found in %s.', dataDir);
+files = dir(fullfile(dataDir, 'Ra_s*.mat'));
+assert(~isempty(files), 'No Ra session MAT files found in %s.', dataDir);
 
 codes.CORRECT = 150;
 codes.FALSEALARM = 156;
@@ -88,4 +88,4 @@ set(gca, 'FontSize',20, 'FontName','Arial', 'FontWeight','bold');
 grid on; box off;
 exportgraphics(fig, fullfile(outDir, 'HitRate_vs_Difficulty.png'), ...
     'Resolution',300);
-fprintf('Figure 1 Monkey RA panels saved in %s.\n', outDir);
+fprintf('Figure 1 Monkey Ra panels saved in %s.\n', outDir);

@@ -1,4 +1,4 @@
-%% Plot best grouped-5CV model feature importance: Monkey RA
+%% Plot best grouped-5CV model feature importance: Monkey Ra
 % Preserves the original sorted, timing/amplitude color-coded Figure 5 style.
 % The grouped-5CV winner is selected by ROC AUC in the Python ML analysis.
 
@@ -7,7 +7,7 @@ clear; clc;
 %% ---------------- Locate and load exported importance ----------------
 scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
-resultDir = fullfile(scriptDir, 'python_ml_results', 'Monkey_RA');
+resultDir = fullfile(scriptDir, 'python_ml_results', 'Monkey_Ra');
 matFile = fullfile(resultDir, 'best_5cv_feature_importance.mat');
 
 if ~isfile(matFile)
@@ -69,7 +69,7 @@ b.CData = C;
 set(gca, 'XTick',1:numel(impPctSorted), 'XTickLabel',featSorted, ...
     'FontName','Arial', 'FontSize',11, 'FontWeight','Bold', 'Box','off');
 xtickangle(45);
-title('Monkey RA', 'FontName','Arial', 'FontWeight','Bold', 'FontSize',16);
+title('Monkey Ra', 'FontName','Arial', 'FontWeight','Bold', 'FontSize',16);
 ylabel('Importance (%)', 'FontName','Arial', 'FontWeight','Bold', 'FontSize',15);
 maxY = max(impPctSorted);
 if maxY <= 0, maxY = 1; end
@@ -89,14 +89,14 @@ hold off;
 
 %% ---------------- Save figure and plotted values ---------------------
 outDir = paperFigureDir(5);
-pngFile = fullfile(outDir, 'RF_FeatureImportance_Sorted_Color_MonkRA.png');
+pngFile = fullfile(outDir, 'RF_FeatureImportance_Sorted_Color_MonkRa.png');
 exportgraphics(gcf, pngFile, 'Resolution',300);
 
 importanceTable = table(rawFeatureSorted, featSorted, impPctSorted, ...
     repmat(modelName,numel(impPctSorted),1), ...
     'VariableNames',{'Feature','DisplayName','ImportancePercent','Model'});
 writetable(importanceTable, ...
-    fullfile(outDir, 'RF_FeatureImportance_Sorted_Color_MonkRA.csv'));
+    fullfile(outDir, 'RF_FeatureImportance_Sorted_Color_MonkRa.csv'));
 
 fprintf('Grouped-5CV winner: %s (ROC AUC %.3f)\n', modelName, S.grouped5CVROCAUC);
 fprintf('Saved figure: %s\n', pngFile);

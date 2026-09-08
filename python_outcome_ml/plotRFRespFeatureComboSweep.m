@@ -4,7 +4,7 @@ function plotRFRespFeatureComboSweep(animalDir, monkey)
 
 arguments
     animalDir (1,1) string
-    monkey (1,1) string {mustBeMember(monkey,["RA","AB"])}
+    monkey (1,1) string {mustBeMember(monkey,["Ra","Ab"])}
 end
 
 resultDir = fullfile(animalDir, 'python_ml_results', "Monkey_" + monkey, ...
@@ -58,7 +58,7 @@ end
 
 outDir = fullfile(animalDir, 'figures', 'Figure_5');
 if ~isfolder(outDir), mkdir(outDir); end
-if monkey == "RA", tag = "MonkRA"; else, tag = "MonkAB"; end
+if monkey == "Ra", tag = "MonkRa"; else, tag = "MonkAb"; end
 
 %% Feature-by-K grid
 timingRGB = [146 103 203] / 255;

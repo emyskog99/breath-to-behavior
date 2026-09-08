@@ -1,6 +1,6 @@
 function [sessionResults, summaryResults] = run_respiration_peak_frequency()
 %RUN_RESPIRATION_PEAK_FREQUENCY Estimate the dominant filtered respiration rate.
-% Reads every compact Aboo and Raf session file distributed through KiltHub.
+% Reads every compact Ab and Ra session file distributed through KiltHub.
 
 scriptDir = fileparts(mfilename('fullpath'));
 repositoryDir = fileparts(scriptDir);
@@ -8,8 +8,8 @@ outputDir = fullfile(scriptDir, 'outputs');
 if ~isfolder(outputDir), mkdir(outputDir); end
 
 dataSets = { ...
-    "RA", fullfile(repositoryDir, 'respFocusSaccRaf', 'publication_data'), 'Raf_s*.mat'; ...
-    "AB", fullfile(repositoryDir, 'respFocusSaccAboo', 'publication_data'), 'Aboo_s*.mat'};
+    "Ra", fullfile(repositoryDir, 'respFocusSaccRa', 'publication_data'), 'Ra_s*.mat'; ...
+    "Ab", fullfile(repositoryDir, 'respFocusSaccAb', 'publication_data'), 'Ab_s*.mat'};
 peakSearchRangeHz = [0.10 0.50];
 fsDownsampled = 20;
 welchWindowSec = 120;
@@ -53,7 +53,7 @@ sessionResults = table(monkey, session, sourceFile, durationMin, peakHz, ...
     60.*peakHz, 'VariableNames', {'Monkey','Session','SourceFile', ...
     'Duration_min','PeakFrequency_Hz','PeakFrequency_breaths_per_min'});
 
-monkeys = ["RA"; "AB"];
+monkeys = ["Ra"; "Ab"];
 n = zeros(2,1); meanPeakHz = nan(2,1); sdPeakHz = nan(2,1);
 for i = 1:2
     values = peakHz(monkey == monkeys(i));

@@ -1,6 +1,6 @@
-%% Figure 1E - Behavioral performance summary (Monkey AB)
-% The Monkey RA folder produces the psychometric curve and RA pie. This
-% script intentionally produces only the AB pie required for Figure 1E.
+%% Figure 1E - Behavioral performance summary (Monkey Ab)
+% The Monkey Ra folder produces the psychometric curve and Ra pie. This
+% script intentionally produces only the Ab pie required for Figure 1E.
 
 clear; clc;
 
@@ -8,10 +8,10 @@ scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
 outDir = paperFigureDir(1);
 
-srcMat = fullfile(scriptDir, 'respFeaturesAboo.mat');
+srcMat = fullfile(scriptDir, 'respFeaturesAb.mat');
 assert(isfile(srcMat), 'Missing input file: %s', srcMat);
-loaded = load(srcMat, 'respFeaturesAboo');
-respFeatArray = loaded.respFeaturesAboo;
+loaded = load(srcMat, 'respFeaturesAb');
+respFeatArray = loaded.respFeaturesAb;
 
 % Trial-result values used by exGlobals.m. Keeping them local avoids loading
 % lab acquisition configuration merely to recreate a behavior panel.
@@ -45,7 +45,7 @@ end
 validSessions = all(isfinite(sessionPercent), 2);
 assert(any(validSessions), 'No sessions contained valid behavioral outcomes.');
 
-% Match the RA panel: average the outcome percentages across sessions so
+% Match the Ra panel: average the outcome percentages across sessions so
 % sessions contribute equally regardless of trial count.
 meanPercent = mean(sessionPercent(validSessions,:), 1);
 
@@ -76,4 +76,4 @@ legend({'Correct','False Alarm','Miss'}, 'FontName','Arial', ...
 
 outFile = fullfile(outDir, 'Fig1E_BehaviorPie_MonkeyAB.png');
 exportgraphics(fig, outFile, 'Resolution',300);
-fprintf('Figure 1E Monkey AB pie saved to:\n%s\n', outFile);
+fprintf('Figure 1E Monkey Ab pie saved to:\n%s\n', outFile);

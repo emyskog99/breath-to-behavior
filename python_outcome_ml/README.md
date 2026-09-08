@@ -103,8 +103,8 @@ To test the pipeline quickly before the complete nested analysis:
 
 ```powershell
 .\python_outcome_ml\.venv\Scripts\python.exe python_outcome_ml\run_outcome_ml.py `
-  respFocusSaccRaf\respFeaturesRaf.mat `
-  --variable respFeaturesRaf --monkey RA --quick
+  respFocusSaccRa\respFeaturesRa.mat `
+  --variable respFeaturesRa --monkey Ra --quick
 ```
 
 Remove `--quick` for complete results. Full nested LOSO can take several
@@ -135,8 +135,8 @@ intentionally want to discard those checkpoints.
 ## Outputs
 
 The bundled launchers preserve the existing result locations so synced
-checkpoints can resume: `respFocusSaccRaf/python_ml_results/Monkey_RA` and
-`respFocusSaccAboo/python_ml_results/Monkey_AB`. Set the Linux environment
+checkpoints can resume: `respFocusSaccRa/python_ml_results/Monkey_Ra` and
+`respFocusSaccAb/python_ml_results/Monkey_Ab`. Set the Linux environment
 variable `OUTPUT_DIR` only if a different shared result root is desired.
 
 - `ML_RespFeat_Python_Grouped5CV_LOSO.mat`: MATLAB-compatible results
@@ -201,10 +201,10 @@ subset description rather than an unbiased estimate of final performance.
 
 `run_rf_5cv_robustness.py` runs two random-forest-only robustness analyses:
 
-1. It controls previous-trial outcome separately for RA and AB by retaining
+1. It controls previous-trial outcome separately for Ra and Ab by retaining
    only trials immediately following a correct trial, matching the analysis
    described in the manuscript.
-2. It pools RA and AB without adding monkey identity as a predictor. Session
+2. It pools Ra and Ab without adding monkey identity as a predictor. Session
    identifiers remain unique, so no recording session is divided between an
    outer training and test fold. Overall and per-monkey held-out metrics are
    saved for the combined model.

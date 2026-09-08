@@ -50,9 +50,9 @@ echo "[$(date --iso-8601=seconds)] Progress log: $LOG_FILE"
 echo "[$(date --iso-8601=seconds)] CPUs requested: $N_JOBS"
 
 {
-    run_monkey RA "$PROJECT_DIR/respFocusSaccRaf/respFeaturesRaf.mat" \
-        respFeaturesRaf
-    run_monkey AB "$PROJECT_DIR/respFocusSaccAboo/respFeaturesAboo.mat" \
-        respFeaturesAboo
+    run_monkey Ra "$PROJECT_DIR/respFocusSaccRa/respFeaturesRa.mat" \
+        respFeaturesRa
+    run_monkey Ab "$PROJECT_DIR/respFocusSaccAb/respFeaturesAb.mat" \
+        respFeaturesAb
     echo "[$(date --iso-8601=seconds)] Both monkeys complete"
 } 2>&1 | tee -a "$LOG_FILE"

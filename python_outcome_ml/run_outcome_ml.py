@@ -50,7 +50,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mat_file", type=Path, help="Original respFeat MAT file")
     parser.add_argument("--variable", required=True, help="MATLAB struct variable name")
-    parser.add_argument("--monkey", required=True, choices=("RA", "AB"))
+    parser.add_argument("--monkey", required=True, choices=("Ra", "Ab"))
     parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--n-jobs", type=int, default=-1)
     parser.add_argument(

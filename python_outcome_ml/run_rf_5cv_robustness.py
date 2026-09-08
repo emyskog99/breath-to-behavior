@@ -62,10 +62,10 @@ def parse_args() -> argparse.Namespace:
     prev = sub.add_parser("previous-correct", parents=[common],
                           help="Analyze trials immediately following a correct trial")
     prev.add_argument("--cache-file", type=Path, required=True)
-    prev.add_argument("--monkey", required=True, choices=("RA", "AB"))
+    prev.add_argument("--monkey", required=True, choices=("Ra", "Ab"))
 
     combined = sub.add_parser("combined", parents=[common],
-                              help="Pool RA and AB while keeping sessions distinct")
+                              help="Pool Ra and Ab while keeping sessions distinct")
     combined.add_argument("--ra-cache", type=Path, required=True)
     combined.add_argument("--ab-cache", type=Path, required=True)
     return parser.parse_args()
@@ -99,14 +99,14 @@ def load_combined(ra_cache: Path, ab_cache: Path):
     Xr, yr, gr, names_r = load_numeric_cache(ra_cache)
     Xa, ya, ga, names_a = load_numeric_cache(ab_cache)
     if names_r != names_a:
-        raise ValueError("RA and AB feature names or ordering differ")
+        raise ValueError("Ra and Ab feature names or ordering differ")
     # Session identifiers must be unique after pooling.
     ga_unique = ga + int(gr.max()) + 1
     X = np.vstack([Xr, Xa])
     y = np.concatenate([yr, ya])
     groups = np.concatenate([gr, ga_unique])
     monkey = np.concatenate([
-        np.repeat("RA", len(yr)), np.repeat("AB", len(ya))
+        np.repeat("Ra", len(yr)), np.repeat("Ab", len(ya))
     ])
     return X, y, groups, names_r, monkey
 
@@ -275,7 +275,7 @@ def main() -> None:
     else:
         X, y, groups, feature_names, monkey_labels = load_combined(
             args.ra_cache.resolve(), args.ab_cache.resolve())
-        analysis_label = "Combined RA+AB"
+        analysis_label = "Combined Ra+Ab"
         source = [str(args.ra_cache.resolve()), str(args.ab_cache.resolve())]
 
     if args.quick:
@@ -311,7 +311,7 @@ def main() -> None:
                          "n_folds": n_folds,
                          **dummy_metrics(evaluated["y_true"].to_numpy())})
     if args.analysis == "combined":
-        for monkey in ("RA", "AB"):
+        for monkey in ("Ra", "Ab"):
             subset = evaluated[evaluated["monkey"] == monkey]
             summary_rows.append({
                 "population": monkey, "model": "RandomForest", "n_folds": n_folds,

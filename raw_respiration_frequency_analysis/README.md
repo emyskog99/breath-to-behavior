@@ -1,7 +1,7 @@
 # Respiration peak-frequency analysis
 
 `run_respiration_peak_frequency.m` reads the complete filtered respiration
-trace in every compact Monkey RA and AB session MAT file, estimates one
+trace in every compact Monkey Ra and Ab session MAT file, estimates one
 dominant frequency per session with Welch's power spectrum, and summarizes
 the session-level values for each monkey.
 

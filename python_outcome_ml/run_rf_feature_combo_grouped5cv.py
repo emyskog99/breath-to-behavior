@@ -74,7 +74,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mat_file", type=Path, help="Original respFeat MAT file")
     parser.add_argument("--variable", required=True)
-    parser.add_argument("--monkey", required=True, choices=("RA", "AB"))
+    parser.add_argument("--monkey", required=True, choices=("Ra", "Ab"))
     parser.add_argument("--result-dir", required=True, type=Path)
     parser.add_argument("--cache-file", type=Path, default=None)
     parser.add_argument("--n-jobs", type=int, default=-1)
@@ -250,7 +250,7 @@ def make_plots(
         "axes.linewidth": 1.5,
         "font.size": 18,
     })
-    tag = "MonkRA" if monkey == "RA" else "MonkAB"
+    tag = "MonkRa" if monkey == "Ra" else "MonkAb"
     x = summary["num_features"].to_numpy()
 
     fig, ax = plt.subplots(figsize=(9, 6.5))

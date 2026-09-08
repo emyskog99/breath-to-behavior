@@ -1,4 +1,4 @@
-%% Figure 3 - Session-level respiration features (Monkey RA + Monkey AB)
+%% Figure 3 - Session-level respiration features (Monkey Ra + Monkey Ab)
 % Run this section with Ctrl+Enter. It loads both feature arrays, computes
 % per-session means for correct and incorrect trials, performs paired
 % Wilcoxon signed-rank tests, and saves one panel per feature plus a CSV.
@@ -9,15 +9,15 @@ scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
 outDir = paperFigureDir(3);
 
-rafFile  = fullfile(scriptDir, 'respFeaturesRaf.mat');
-abooFile = fullfile(fileparts(scriptDir), 'respFocusSaccAboo', ...
-    'respFeaturesAboo.mat');
-assert(isfile(rafFile),  'Missing input file: %s', rafFile);
-assert(isfile(abooFile), 'Missing input file: %s', abooFile);
+fileRa  = fullfile(scriptDir, 'respFeaturesRa.mat');
+abFile = fullfile(fileparts(scriptDir), 'respFocusSaccAb', ...
+    'respFeaturesAb.mat');
+assert(isfile(fileRa),  'Missing input file: %s', fileRa);
+assert(isfile(abFile), 'Missing input file: %s', abFile);
 
-rafData = load(rafFile, 'respFeaturesRaf');
-respFeatRafArray = rafData.respFeaturesRaf;
-respFeatAbooArray = loadRespFeatureArray(abooFile);
+raData = load(fileRa, 'respFeaturesRa');
+respFeatRaArray = raData.respFeaturesRa;
+respFeatAbArray = loadRespFeatureArray(abFile);
 
 % Trial-result values from exGlobals.m. Keeping the four values used here
 % local makes this plotting script portable and avoids running lab hardware
@@ -44,8 +44,8 @@ metricTitles = { ...
 panelLetters = {'A','B','C','D','E','G','H','I','J','K'};
 isTiming = [true(1,5), false(1,5)];
 
-[meanC_R, meanI_R, sessionR] = computeSessionMeans(respFeatRafArray, metricNames, codes);
-[meanC_A, meanI_A, sessionA] = computeSessionMeans(respFeatAbooArray, metricNames, codes);
+[meanC_R, meanI_R, sessionR] = computeSessionMeans(respFeatRaArray, metricNames, codes);
+[meanC_A, meanI_A, sessionA] = computeSessionMeans(respFeatAbArray, metricNames, codes);
 
 timingColor    = [146 103 203] ./ 255; % purple
 amplitudeColor = [130 176 80] ./ 255;  % green
@@ -64,7 +64,7 @@ for m = 1:numel(metricNames)
     statsRows(end+1,:) = {panelLetters{m}, metricNames{m}, ...
         pR, nR, pA, nA, pAll, nAll}; %#ok<SAGROW>
 
-    fprintf('Figure 3%s, %-18s: RA p=%.3g (n=%d), AB p=%.3g (n=%d), pooled p=%.3g (n=%d)\n', ...
+    fprintf('Figure 3%s, %-18s: Ra p=%.3g (n=%d), Ab p=%.3g (n=%d), pooled p=%.3g (n=%d)\n', ...
         panelLetters{m}, metricNames{m}, pR, nR, pA, nA, pAll, nAll);
 
     values = [meanC_R(validR,m); meanI_R(validR,m); ...
@@ -89,14 +89,14 @@ for m = 1:numel(metricNames)
         hR = scatter(ax, meanC_R(validR,m), meanI_R(validR,m), 105, ...
             'o', 'filled', 'MarkerFaceColor',featureColor, ...
             'MarkerEdgeColor','none', ...
-            'DisplayName',sprintf('Monkey RA (%s)', formatP(pR)));
+            'DisplayName',sprintf('Monkey Ra (%s)', formatP(pR)));
         handles(end+1) = hR; %#ok<SAGROW>
     end
     if any(validA)
         hA = scatter(ax, meanC_A(validA,m), meanI_A(validA,m), 105, ...
             's', 'filled', 'MarkerFaceColor',featureColor, ...
             'MarkerEdgeColor','none', ...
-            'DisplayName',sprintf('Monkey AB (%s)', formatP(pA)));
+            'DisplayName',sprintf('Monkey Ab (%s)', formatP(pA)));
         handles(end+1) = hA; %#ok<SAGROW>
     end
 
@@ -129,11 +129,11 @@ fprintf('Figure 3 outputs saved to:\n%s\n', outDir);
 
 %% Local functions
 function respFeatArray = loadRespFeatureArray(matFile)
-loaded = load(matFile, 'respFeaturesAboo');
-if ~isfield(loaded, 'respFeaturesAboo')
-    error('Variable respFeaturesAboo was not found in %s.', matFile);
+loaded = load(matFile, 'respFeaturesAb');
+if ~isfield(loaded, 'respFeaturesAb')
+    error('Variable respFeaturesAb was not found in %s.', matFile);
 end
-respFeatArray = loaded.respFeaturesAboo;
+respFeatArray = loaded.respFeaturesAb;
 end
 
 function [meanCorrect, meanIncorrect, sessionIndices] = computeSessionMeans(respFeatArray, metricNames, codes)

@@ -14,7 +14,7 @@ assert(isfile(predictionFile), ...
 
 P = readtable(predictionFile,'TextType','string');
 models = ["Baseline","Ridge","GradientBoosting"];
-monkeys = ["RA","AB"];
+monkeys = ["Ra","Ab"];
 nPermutations = 1000;
 sessionRows = cell(0,10);
 summaryRows = cell(0,13);
@@ -130,7 +130,7 @@ end
 
 function plotClassificationSummary(summary,outDir)
 models = ["Baseline","Ridge","GradientBoosting"];
-monkeys = ["RA","AB"];
+monkeys = ["Ra","Ab"];
 fig = figure('Color','white','Units','inches','Position',[1 1 9 4]);
 tiledlayout(fig,1,2,'Padding','compact','TileSpacing','compact');
 for i = 1:numel(monkeys)

@@ -90,8 +90,8 @@ def export_one(result_dir: Path) -> None:
 def main() -> None:
     args = parse_args()
     result_dirs = args.result_dir or [
-        args.project / "respFocusSaccRaf" / "python_ml_results" / "Monkey_RA",
-        args.project / "respFocusSaccAboo" / "python_ml_results" / "Monkey_AB",
+        args.project / "respFocusSaccRa" / "python_ml_results" / "Monkey_Ra",
+        args.project / "respFocusSaccAb" / "python_ml_results" / "Monkey_Ab",
     ]
     for result_dir in result_dirs:
         export_one(result_dir)

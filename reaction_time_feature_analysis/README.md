@@ -1,7 +1,7 @@
 # Reaction-time respiration-feature analysis
 
 This analysis uses the `Reaction Time` column already stored in the Monkey
-RA and Monkey AB respiration-feature MAT files.
+Ra and Monkey Ab respiration-feature MAT files.
 
 ## Run
 
@@ -33,7 +33,7 @@ predictions. Slow RT is treated as the positive class.
 - Each recording session is split at its own median reaction time:
   `fast <= session median` and `slow > session median`.
 - Session-level feature means are compared with paired Wilcoxon signed-rank
-  tests. Results are reported separately for Monkey RA, Monkey AB, and the
+  tests. Results are reported separately for Monkey Ra, Monkey Ab, and the
   combined set of sessions.
 - Between-monkey reaction-time inference uses session medians and a Wilcoxon
   rank-sum test, rather than treating all trials as independent.
@@ -57,7 +57,7 @@ extend beyond the saccade used to calculate RT.
 - `reaction_time_session_summary.csv`: median split and trial counts for
   every session.
 - `reaction_time_monkey_summary.csv`: descriptive RT statistics by monkey.
-- `reaction_time_between_monkeys.csv`: session-level RA vs AB test.
+- `reaction_time_between_monkeys.csv`: session-level Ra vs Ab test.
 - `reaction_time_feature_statistics.csv`: fast vs slow feature statistics.
 - `RT_session_medians_by_monkey.png`: overall session-median RT comparison.
 - `RT_trial_distributions_by_monkey.png`: descriptive trial-level densities.

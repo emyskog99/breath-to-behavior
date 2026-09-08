@@ -1,5 +1,5 @@
-%% Figure 3 - Session-level respiration features (Monkey RA + Monkey AB)
-% Loads AB locally and RA from the sibling folder, then saves the combined
+%% Figure 3 - Session-level respiration features (Monkey Ra + Monkey Ab)
+% Loads Ab locally and Ra from the sibling folder, then saves the combined
 % per-feature panels and statistics in this folder's Figure 3 directory.
 
 clear; clc;
@@ -8,16 +8,16 @@ scriptDir = fileparts(mfilename('fullpath'));
 addpath(scriptDir);
 outDir = paperFigureDir(3);
 
-abooFile = fullfile(scriptDir, 'respFeaturesAboo.mat');
-rafFile = fullfile(fileparts(scriptDir), 'respFocusSaccRaf', ...
-    'respFeaturesRaf.mat');
-assert(isfile(abooFile), 'Missing input file: %s', abooFile);
-assert(isfile(rafFile), 'Missing input file: %s', rafFile);
+abFile = fullfile(scriptDir, 'respFeaturesAb.mat');
+fileRa = fullfile(fileparts(scriptDir), 'respFocusSaccRa', ...
+    'respFeaturesRa.mat');
+assert(isfile(abFile), 'Missing input file: %s', abFile);
+assert(isfile(fileRa), 'Missing input file: %s', fileRa);
 
-abooData = load(abooFile, 'respFeaturesAboo');
-rafData = load(rafFile, 'respFeaturesRaf');
-respFeatAbooArray = abooData.respFeaturesAboo;
-respFeatRafArray = rafData.respFeaturesRaf;
+abData = load(abFile, 'respFeaturesAb');
+raData = load(fileRa, 'respFeaturesRa');
+respFeatAbArray = abData.respFeaturesAb;
+respFeatRaArray = raData.respFeaturesRa;
 
 codes.CORRECT     = 150;
 codes.FALSEALARM  = 156;
@@ -37,8 +37,8 @@ metricTitles = { ...
 panelLetters = {'A','B','C','D','E','G','H','I','J','K'};
 isTiming = [true(1,5), false(1,5)];
 
-[meanC_R, meanI_R] = computeSessionMeans(respFeatRafArray, metricNames, codes);
-[meanC_A, meanI_A] = computeSessionMeans(respFeatAbooArray, metricNames, codes);
+[meanC_R, meanI_R] = computeSessionMeans(respFeatRaArray, metricNames, codes);
+[meanC_A, meanI_A] = computeSessionMeans(respFeatAbArray, metricNames, codes);
 
 timingColor = [146 103 203] ./ 255;
 amplitudeColor = [130 176 80] ./ 255;
@@ -54,7 +54,7 @@ for m = 1:numel(metricNames)
 
     statsRows(end+1,:) = {panelLetters{m}, metricNames{m}, ...
         pR, nR, pA, nA, pAll, nAll}; %#ok<SAGROW>
-    fprintf(['Figure 3%s, %-18s: RA p=%.3g (n=%d), AB p=%.3g ' ...
+    fprintf(['Figure 3%s, %-18s: Ra p=%.3g (n=%d), Ab p=%.3g ' ...
         '(n=%d), pooled p=%.3g (n=%d)\n'], panelLetters{m}, ...
         metricNames{m}, pR, nR, pA, nA, pAll, nAll);
 
@@ -77,13 +77,13 @@ for m = 1:numel(metricNames)
         handles(end+1) = scatter(ax, meanC_R(validR,m), meanI_R(validR,m), ...
             105, 'o', 'filled', 'MarkerFaceColor',featureColor, ...
             'MarkerEdgeColor','none', ...
-            'DisplayName',sprintf('Monkey RA (%s)', formatP(pR))); %#ok<SAGROW>
+            'DisplayName',sprintf('Monkey Ra (%s)', formatP(pR))); %#ok<SAGROW>
     end
     if any(validA)
         handles(end+1) = scatter(ax, meanC_A(validA,m), meanI_A(validA,m), ...
             105, 's', 'filled', 'MarkerFaceColor',featureColor, ...
             'MarkerEdgeColor','none', ...
-            'DisplayName',sprintf('Monkey AB (%s)', formatP(pA))); %#ok<SAGROW>
+            'DisplayName',sprintf('Monkey Ab (%s)', formatP(pA))); %#ok<SAGROW>
     end
 
     plot(ax, limits, limits, '--k', 'LineWidth',1.5, 'HandleVisibility','off');

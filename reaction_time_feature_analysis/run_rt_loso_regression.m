@@ -11,9 +11,9 @@ projectDir = fileparts(scriptDir);
 outDir = fullfile(scriptDir, 'outputs', 'loso_regression');
 if ~isfolder(outDir), mkdir(outDir); end
 
-rafFile = fullfile(projectDir, 'respFocusSaccRaf', 'respFeaturesRaf.mat');
-abFile = fullfile(projectDir, 'respFocusSaccAboo', 'respFeaturesAboo.mat');
-assert(isfile(rafFile), 'Missing input file: %s', rafFile);
+fileRa = fullfile(projectDir, 'respFocusSaccRa', 'respFeaturesRa.mat');
+abFile = fullfile(projectDir, 'respFocusSaccAb', 'respFeaturesAb.mat');
+assert(isfile(fileRa), 'Missing input file: %s', fileRa);
 assert(isfile(abFile), 'Missing input file: %s', abFile);
 
 featureNames = { ...
@@ -21,16 +21,16 @@ featureNames = { ...
     'exhStartTimesRel', 'respVolume', 'inhVolume', 'exhVolume', ...
     'inhDepth', 'exhDepth'};
 
-rafLoaded = load(rafFile, 'respFeaturesRaf');
-abLoaded = load(abFile, 'respFeaturesAboo');
+raLoaded = load(fileRa, 'respFeaturesRa');
+abLoaded = load(abFile, 'respFeaturesAb');
 
-dataR = buildTrialDataset(rafLoaded.respFeaturesRaf, "RA", featureNames);
-dataA = buildTrialDataset(abLoaded.respFeaturesAboo, "AB", featureNames);
+dataR = buildTrialDataset(raLoaded.respFeaturesRa, "Ra", featureNames);
+dataA = buildTrialDataset(abLoaded.respFeaturesAb, "Ab", featureNames);
 
-fprintf('Running Monkey RA LOSO (%d trials, %d sessions)...\n', ...
+fprintf('Running Monkey Ra LOSO (%d trials, %d sessions)...\n', ...
     height(dataR), numel(unique(dataR.Session)));
 [predR, foldR, importanceR] = runAnimalLOSO(dataR, featureNames);
-fprintf('Running Monkey AB LOSO (%d trials, %d sessions)...\n', ...
+fprintf('Running Monkey Ab LOSO (%d trials, %d sessions)...\n', ...
     height(dataA), numel(unique(dataA.Session)));
 [predA, foldA, importanceA] = runAnimalLOSO(dataA, featureNames);
 
@@ -44,7 +44,7 @@ modelNames = ["Baseline", "Ridge", "GradientBoosting"];
 summaryRows = cell(0,10);
 nPermutations = 1000;
 
-for monkey = ["RA", "AB"]
+for monkey = ["Ra", "Ab"]
     P = predictions(predictions.Monkey == monkey,:);
     y = P.ActualRT_ms;
     session = P.Session;
@@ -245,7 +245,7 @@ function plotPerformanceSummary(summary,outDir)
 fig = figure('Color','white','Units','inches','Position',[1 1 9 4]);
 tiledlayout(fig,1,2,'Padding','compact','TileSpacing','compact');
 models = ["Baseline","Ridge","GradientBoosting"];
-monkeys = ["RA","AB"];
+monkeys = ["Ra","Ab"];
 for i = 1:2
     monkey = monkeys(i);
     S = summary(summary.Monkey==monkey,:);
@@ -266,7 +266,7 @@ function plotPredictions(predictions,summary,outDir)
 fig = figure('Color','white','Units','inches','Position',[1 1 9 4]);
 tiledlayout(fig,1,2,'Padding','compact','TileSpacing','compact');
 rng(20260809,'twister');
-monkeys = ["RA","AB"];
+monkeys = ["Ra","Ab"];
 for i = 1:2
     monkey = monkeys(i);
     P = predictions(predictions.Monkey==monkey,:);
@@ -288,7 +288,7 @@ end
 function plotFeatureImportance(importance,outDir)
 fig = figure('Color','white','Units','inches','Position',[1 1 9 6]);
 tiledlayout(fig,2,2,'Padding','compact','TileSpacing','compact');
-for monkey = ["RA","AB"]
+for monkey = ["Ra","Ab"]
     for model = ["Ridge","GradientBoosting"]
         I = importance(importance.Monkey==monkey & importance.Model==model,:);
         [values,order] = sort(I.NormalizedImportance,'descend');

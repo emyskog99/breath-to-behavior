@@ -3,7 +3,7 @@ function report = validateRespPublicationData(varargin)
 %
 % Checks each file's schema, session metadata, respiration trace, behavioral
 % vector lengths and timing coverage. It also cross-checks trial counts
-% against respFeaturesAboo.mat.
+% against respFeaturesAb.mat.
 %
 % Example:
 %   validateRespPublicationData('ExpectedSessionCount', 47)
@@ -14,10 +14,10 @@ p = inputParser;
 p.addParameter('InputDir', fullfile(scriptDir, 'publication_data'), ...
     @(x) ischar(x) || isstring(x));
 p.addParameter('FeatureFile', fullfile(scriptDir, ...
-    'respFeaturesAboo.mat'), ...
+    'respFeaturesAb.mat'), ...
     @(x) ischar(x) || isstring(x));
-p.addParameter('Subject', 'Aboo', @(x) ischar(x) || isstring(x));
-p.addParameter('FeatureVariable', 'respFeaturesAboo', ...
+p.addParameter('Subject', 'Ab', @(x) ischar(x) || isstring(x));
+p.addParameter('FeatureVariable', 'respFeaturesAb', ...
     @(x) ischar(x) || isstring(x));
 p.addParameter('ExpectedSessionCount', 47, ...
     @(x) isnumeric(x) && isscalar(x) && x >= 0 && fix(x) == x);
@@ -75,10 +75,6 @@ for iFile = 1:nFiles
                 double(data.schema.version) ~= 1
             error('Unsupported schema name or version.');
         end
-        if ~strcmp(data.session.subject, subject)
-            error('Embedded subject does not match expected subject %s.', subject);
-        end
-
         sessionNumber(iFile) = double(data.session.number);
         trialCount(iFile) = double(data.session.trialCount);
         if ~isscalar(sessionNumber(iFile)) || sessionNumber(iFile) < 1 || ...

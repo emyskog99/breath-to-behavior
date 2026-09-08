@@ -1,6 +1,6 @@
 # Supplemental LOSO reaction-time regression results
 
-The regression was run separately for Monkey RA and Monkey AB. Each fold
+The regression was run separately for Monkey Ra and Monkey Ab. Each fold
 held out one complete recording session. The baseline prediction was the
 median reaction time in the training sessions.
 
@@ -12,12 +12,12 @@ error for a previously unseen session.
 
 | Monkey | Model | MAE (ms) | RMSE (ms) | Pearson r | R2 vs baseline |
 |---|---:|---:|---:|---:|---:|
-| RA | Median baseline | 32.36 | 41.68 | — | 0 |
-| RA | Ridge | 32.39 | 41.46 | 0.044 | 0.010 |
-| RA | Gradient boosting | 35.10 | 46.04 | 0.125 | -0.221 |
-| AB | Median baseline | 47.07 | 63.26 | — | 0 |
-| AB | Ridge | 47.36 | 62.63 | 0.054 | 0.020 |
-| AB | Gradient boosting | 48.55 | 66.53 | 0.101 | -0.106 |
+| Ra | Median baseline | 32.36 | 41.68 | — | 0 |
+| Ra | Ridge | 32.39 | 41.46 | 0.044 | 0.010 |
+| Ra | Gradient boosting | 35.10 | 46.04 | 0.125 | -0.221 |
+| Ab | Median baseline | 47.07 | 63.26 | — | 0 |
+| Ab | Ridge | 47.36 | 62.63 | 0.054 | 0.020 |
+| Ab | Gradient boosting | 48.55 | 66.53 | 0.101 | -0.106 |
 
 Ridge slightly reduced squared error but did not improve MAE. Gradient
 boosting captured a weak ordering of trials, reflected in its positive
@@ -33,8 +33,8 @@ be interpreted as evidence of useful predictive accuracy.
 ## Feature pattern
 
 Timing features dominated both models. Inhalation onset was the strongest
-feature for RA. Exhalation onset and inhalation onset were the two strongest
-features for AB. This agrees with the primary fast-versus-slow session-level
+feature for Ra. Exhalation onset and inhalation onset were the two strongest
+features for Ab. This agrees with the primary fast-versus-slow session-level
 analysis, even though the trial-level predictive effect is small.
 
 ## Recommended interpretation
@@ -60,14 +60,14 @@ balances the classes.
 
 | Monkey | Model | Accuracy | Balanced accuracy | AUC | Sensitivity | Specificity |
 |---|---:|---:|---:|---:|---:|---:|
-| RA | Chance baseline | 50.0% | 50.0% | 0.500 | 0.0% | 100.0% |
-| RA | Ridge | 52.1% | 52.1% | 0.524 | 51.7% | 52.5% |
-| RA | Gradient boosting | 53.2% | 53.2% | 0.541 | 52.9% | 53.5% |
-| AB | Chance baseline | 50.0% | 50.0% | 0.500 | 0.0% | 100.0% |
-| AB | Ridge | 51.1% | 51.1% | 0.517 | 49.3% | 52.9% |
-| AB | Gradient boosting | 52.4% | 52.4% | 0.535 | 52.3% | 52.5% |
+| Ra | Chance baseline | 50.0% | 50.0% | 0.500 | 0.0% | 100.0% |
+| Ra | Ridge | 52.1% | 52.1% | 0.524 | 51.7% | 52.5% |
+| Ra | Gradient boosting | 53.2% | 53.2% | 0.541 | 52.9% | 53.5% |
+| Ab | Chance baseline | 50.0% | 50.0% | 0.500 | 0.0% | 100.0% |
+| Ab | Ridge | 51.1% | 51.1% | 0.517 | 49.3% | 52.9% |
+| Ab | Gradient boosting | 52.4% | 52.4% | 0.535 | 52.3% | 52.5% |
 
 Accuracy and AUC exceeded chance in within-session permutation tests
 (`p = 0.001`), but the effect size was small. Gradient boosting improved
-accuracy by only 3.2 percentage points for RA and 2.4 points for AB. These
+accuracy by only 3.2 percentage points for Ra and 2.4 points for Ab. These
 metrics support statistical detectability, not strong predictive utility.

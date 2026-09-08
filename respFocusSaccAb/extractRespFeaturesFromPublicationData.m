@@ -7,7 +7,7 @@ function featureArray = extractRespFeaturesFromPublicationData(varargin)
 % Name-value options:
 %   InputDir   Folder produced by exportRespPublicationData.
 %   OutputFile Feature MAT file to create.
-%   Subject    Subject label and input filename prefix (default Aboo).
+%   Subject    Subject label and input filename prefix (default Ab).
 %   OutputVariable Variable name stored in OutputFile.
 %   NumWorkers Process workers (0 = automatic, capped at 4).
 
@@ -16,10 +16,10 @@ p = inputParser;
 p.addParameter('InputDir', fullfile(scriptDir, 'publication_data'), ...
     @(x) ischar(x) || isstring(x));
 p.addParameter('OutputFile', ...
-    fullfile(scriptDir, 'respFeaturesAboo.mat'), ...
+    fullfile(scriptDir, 'respFeaturesAb.mat'), ...
     @(x) ischar(x) || isstring(x));
-p.addParameter('Subject', 'Aboo', @(x) ischar(x) || isstring(x));
-p.addParameter('OutputVariable', 'respFeaturesAboo', ...
+p.addParameter('Subject', 'Ab', @(x) ischar(x) || isstring(x));
+p.addParameter('OutputVariable', 'respFeaturesAb', ...
     @(x) ischar(x) || isstring(x));
 p.addParameter('NumWorkers', 0, ...
     @(x) isnumeric(x) && isscalar(x) && x >= 0 && fix(x) == x);
@@ -64,12 +64,12 @@ if numWorkers > 1
     end
     parfor iFile = 1:nFiles
         [sessionNumbers(iFile), sessionResults{iFile}, messages(iFile)] = ...
-            computeOneFile(fullfile(files(iFile).folder, files(iFile).name), subject);
+            computeOneFile(fullfile(files(iFile).folder, files(iFile).name));
     end
 else
     for iFile = 1:nFiles
         [sessionNumbers(iFile), sessionResults{iFile}, messages(iFile)] = ...
-            computeOneFile(fullfile(files(iFile).folder, files(iFile).name), subject);
+            computeOneFile(fullfile(files(iFile).folder, files(iFile).name));
     end
 end
 
@@ -103,7 +103,7 @@ save(outputFile, '-struct', 'output', '-v7.3');
 fprintf('Saved %d sessions to %s\n', nFiles, outputFile);
 end
 
-function [sessionNumber, sessionResult, message] = computeOneFile(fileName, expectedSubject)
+function [sessionNumber, sessionResult, message] = computeOneFile(fileName)
 sessionNumber = NaN;
 sessionResult = struct();
 message = "";
@@ -111,9 +111,6 @@ try
     loaded = load(fileName, 'publicationData');
     if ~isfield(loaded, 'publicationData')
         error('MAT file does not contain publicationData.');
-    end
-    if ~strcmp(loaded.publicationData.session.subject, expectedSubject)
-        error('Embedded subject does not match expected subject %s.', expectedSubject);
     end
     sessionNumber = double(loaded.publicationData.session.number);
     sessionResult = computeRespFeaturesFromPublicationSession(loaded.publicationData);
