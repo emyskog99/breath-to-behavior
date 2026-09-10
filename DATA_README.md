@@ -23,7 +23,7 @@ Office Phone Number: 412-268-9989
 
 Directory of Files:
 
-A. `respFocusSaccAb/publication_data/Ab_s###.mat` files (47 files)
+A. `MonokeyAb_data/Ab_s###.mat` files (47 files)
 
 ```text
 Short description: MATLAB files containing compact data from individual
@@ -33,7 +33,7 @@ outcomes and event times, processing parameters, session metadata, and source
 file provenance.
 ```
 
-B. `respFocusSaccRa/publication_data/Ra_s###.mat` files (41 files)
+B. `MonokeyRa_data/Ra_s###.mat` files (41 files)
 
 ```text
 Short description: MATLAB files containing compact data from individual
