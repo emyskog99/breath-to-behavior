@@ -4,6 +4,9 @@ This code repository accompanies the NHP respiration paper. It reconstructs
 respiration features and reproduces the behavioral, respiration, reaction-time,
 and outcome-prediction analyses from compact MATLAB session files.
 
+Dataset-level metadata and a complete file overview are provided in
+[`DATA_README.md`](DATA_README.md).
+
 The data are not stored on GitHub. Download the companion dataset from
 [KiltHub](<KILTHUB_DATASET_URL>) and cite the dataset DOI listed there. The
 compact files contain only the complete filtered respiration channel and the
@@ -21,6 +24,7 @@ raw_respiration_frequency_analysis/ filtered-signal peak-frequency analysis
 rebuild_all_features.m             rebuild both feature arrays
 validate_all_data.m                validate all 88 compact session files
 SHA256SUMS                         checksums for the KiltHub session files
+DATA_README.md                     dataset metadata and file descriptions
 ```
 
 ## Install the KiltHub data
