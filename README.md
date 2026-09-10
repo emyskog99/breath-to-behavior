@@ -35,9 +35,12 @@ cd breath-to-behavior
 Place the files as follows:
 
 ```text
-respFocusSaccAb/publication_data/Ab_s*.mat   # 47 files
-respFocusSaccRa/publication_data/Ra_s*.mat   # 41 files
+respFocusSaccAb/publication_data/Ab_s###.mat   # 47 files
+respFocusSaccRa/publication_data/Ra_s###.mat   # 41 files
 ```
+
+Here, `###` is the session number. Publication filenames are neutral and do
+not include source-dataset suffixes such as `noArray` or `ArrayV1V4`.
 
 The repository ignores MAT files so downloaded data and generated results
 cannot accidentally be committed to GitHub. From the repository root, verify
@@ -118,7 +121,7 @@ validation.`
 
 ## Compact session format
 
-Every `Ab_s*.mat` or `Ra_s*.mat` file contains one `publicationData`
+Every `Ab_s###.mat` or `Ra_s###.mat` file contains one `publicationData`
 structure using `RespNHPPublicationSession` schema version 1:
 
 - `session`: source metadata, session number, and trial count

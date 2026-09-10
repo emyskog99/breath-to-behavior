@@ -1,6 +1,6 @@
 # Compact publication data
 
-Place the 47 `Ab_s*.mat` files downloaded from the companion KiltHub
+Place the 47 `Ab_s###.mat` files downloaded from the companion KiltHub
 dataset in this folder.
 
 Each session file contains one top-level variable, `publicationData`, with
